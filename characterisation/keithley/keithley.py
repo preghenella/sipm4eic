@@ -95,7 +95,7 @@ def scan(Vmin, Vmax, Ilim, Vstep, Twait, Nave, fPlot, fScale = 1. ):
         
         fPlotVoltage.append(fScale * meas["voltage"])
         fPlotCurrent.append(fScale * meas["current"])
-        fPlot.scatter(fPlotVoltage, fPlotCurrent, color="blue", marker="x")
+        fPlot.scatter(fPlotVoltage, fPlotCurrent, color="#1f77b4", marker="s")
         plt.draw()
         plt.pause(0.1)
     
