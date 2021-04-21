@@ -55,8 +55,8 @@ def initialize(filename):
 #            print line.rstrip()
             sock.send(line)
 
-def scan(Vmin, Vmax, Ilim, Vstep, Twait, Nave):
-    print ("--- starting scan: Vbias = [%f, %f] V | Ilim = %f A | Vstep = %f V | Twait = %s s | Nave = %d" % (Vmin, Vmax, Ilim, Vstep, Twait, Nave, fPlot ))
+def scan(Vmin, Vmax, Ilim, Vstep, Twait, Nave, fPlot ):
+    print ("--- starting scan: Vbias = [%f, %f] V | Ilim = %f A | Vstep = %f V | Twait = %s s | Nave = %d" % (Vmin, Vmax, Ilim, Vstep, Twait, Nave))
     measurements = []
 
     ### move to Vmin, turn on and wait few seconds
