@@ -55,7 +55,7 @@ def initialize(filename):
 #            print line.rstrip()
             sock.send(line)
 
-def scan(Vmin, Vmax, Ilim, Vstep, Twait, Nave, fPlot ):
+def scan(Vmin, Vmax, Ilim, Vstep, Twait, Nave, fPlot, fScale = 1. ):
     print ("--- starting scan: Vbias = [%f, %f] V | Ilim = %f A | Vstep = %f V | Twait = %s s | Nave = %d" % (Vmin, Vmax, Ilim, Vstep, Twait, Nave))
     measurements = []
 
@@ -93,8 +93,8 @@ def scan(Vmin, Vmax, Ilim, Vstep, Twait, Nave, fPlot ):
         meas = { "voltage" : float(Vbias) , "current" : np.mean(currents) , "stddev" : np.std(currents) }
         measurements.append(meas)
         
-        fPlotVoltage.append(meas["voltage"])
-        fPlotCurrent.append(meas["current"])
+        fPlotVoltage.append(fScale * meas["voltage"])
+        fPlotCurrent.append(fScale * meas["current"])
         fPlot.scatter(fPlotVoltage, fPlotCurrent, color="blue", marker="x")
         plt.draw()
         plt.pause(0.1)
@@ -151,7 +151,6 @@ try:
     coarse_start = time.time()
     measurements = scan(Vmin = 10., Vmax = 100, Ilim = 250.e-6, Vstep = 1., Twait = 0.1, Nave = 1, fPlot = ax[0])
     write_measurements(measurements, outfiletagname + '.coarse.cvs')
-    plot_measurements(measurements, ax[0])
     Vbd = estimate_Vbd(measurements, 30.)
     coarse_end = time.time()
     print("--- coarse scan took %f seconds: estimated Vbd = %f" % (coarse_end - coarse_start, Vbd))
@@ -160,7 +159,6 @@ try:
     wide_start = time.time()
     measurements = scan(Vmin = Vbd - 5., Vmax = 100., Ilim = 250.e-6, Vstep = 0.2, Twait = 1., Nave = 3, fPlot = ax[1])
     write_measurements(measurements, outfiletagname + '.wide.cvs')
-    plot_measurements(measurements, ax[1])
     Vbd = estimate_Vbd(measurements, 30.)
     wide_end = time.time();
     print("--- wide scan took %f seconds: estimated Vbd = %f" % (wide_end - wide_start, Vbd))
@@ -169,16 +167,14 @@ try:
     fine_start = time.time()
     measurements = scan(Vmin = Vbd - 1., Vmax = Vbd + 2., Ilim = 250.e-6, Vstep = 0.05, Twait = 1., Nave = 10, fPlot = ax[2])
     write_measurements(measurements, outfiletagname + '.fine.cvs')
-    plot_measurements(measurements, ax[2])
     Vbd = estimate_Vbd(measurements, 30.)
     fine_end = time.time();
     print("--- fine scan took %f seconds: estimated Vbd = %f" % (fine_end - fine_start, Vbd))
 
     ### forward scan
     forward_start = time.time()
-    measurements = scan(Vmin = 0., Vmax = -3., Ilim = 25.e-3, Vstep = -0.1, Twait = 1., Nave = 3, fPlot = ax[3])
+    measurements = scan(Vmin = 0., Vmax = -3., Ilim = 25.e-3, Vstep = -0.1, Twait = 1., Nave = 3, fPlot = ax[3], fScale = -1.)
     write_measurements(measurements, outfiletagname + '.forward.cvs')
-    plot_measurements(measurements, ax[3], -1.)
     forward_end = time.time();
     print("--- forward scan took %f seconds" % (forward_end - forward_start))
     
