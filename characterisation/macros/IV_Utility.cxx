@@ -33,30 +33,45 @@ TGraphErrors   *fGetYsqrtOnIV           ( const TGraphErrors *fTarget )         
     auto fResult  = new TGraphErrors();
     for ( Int_t iPnt = 0; iPnt < fTarget->GetN(); ++iPnt )   {
         auto    fXvalue =   fTarget->GetPointX(iPnt);
-        auto    fYvalue =   TMath::Sqrt(fTarget->GetPointY(iPnt));
+        auto    fYvalue =   fTarget->GetPointY(iPnt) >= 0 ? TMath::Sqrt(fTarget->GetPointY(iPnt)) : 0.;
+        auto    fXerror =   fTarget->GetErrorX(iPnt);
+        auto    fYerror =   fTarget->GetErrorY(iPnt);
         fResult ->  SetPoint( iPnt, fXvalue, fYvalue );
-        // TODO: 1. Protection against negative Y values
-        // TODO: 2. Correct error propagation
+        if ( fYvalue == 0 ) {
+            cout << "[WARNING] sqrt argument negative! Setting to 0" << endl;
+            fResult ->  SetPointError( iPnt, fXerror, 0. );
+        }   else    {
+            fResult ->  SetPointError( iPnt, fXerror, fYerror/(2.*fYvalue) );
+        }
     }
     return fResult;
-}      // ! TODO !
+}
 //
 TGraphErrors   *fGetYderivativeOnIV     ( const TGraphErrors *fTarget )                                 {
-
     auto fResult  = new TGraphErrors();
     for ( Int_t iPnt = 0; iPnt < fTarget->GetN() -1; ++iPnt )   {
         auto    fXvalMin    =   fTarget->GetPointX(iPnt);
         auto    fYvalMin    =   fTarget->GetPointY(iPnt);
+        auto    fXerrMin    =   fTarget->GetErrorX(iPnt);
+        auto    fYerrMin    =   fTarget->GetErrorY(iPnt);
         auto    fXvalMax    =   fTarget->GetPointX(iPnt +1);
         auto    fYvalMax    =   fTarget->GetPointY(iPnt +1);
+        auto    fXerrMax    =   fTarget->GetErrorX(iPnt +1);
+        auto    fYerrMax    =   fTarget->GetErrorY(iPnt +1);
         auto    fXcenter    =   0.5*( fXvalMax + fXvalMin );
-        auto    fYslop_     =   ( fYvalMax - fYvalMin )/( fXvalMax - fXvalMin );
-        fResult ->  SetPoint( iPnt, fXcenter, fYslop_ );
-        // TODO: 1. Protection against 0 divisor
-        // TODO: 2. Correct error propagation
+        auto    fYslop_     =   1.;
+        if  ( ( fXvalMax - fXvalMin ) == 0 )    {
+            cout << "[WARNING] DeltaX equals zero, setting Slope to 1"
+            fYslop_     =   1.;
+        }  else {
+            fYslop_     =   ( fYvalMax - fYvalMin )/( fXvalMax - fXvalMin );
+        }
+        auto fXerror    =   TMath::sqrt( fXerrMin*fXerrMin + fXerrMax*fXerrMax );
+        auto fYerror    =   fYslop_*TMath::sqrt( fXerror*fXerror/(( fXvalMax - fXvalMin )*( fXvalMax - fXvalMin )) + ( fYerrMin*fYerrMin + fYerrMax*fYerrMax )/(( fYvalMax - fYvalMin )*( fYvalMax - fYvalMin )) );
+        fResult ->  SetPoint( iPnt, fXerror, fYslop_ );
     }
     return fResult;
-}      // ! TODO !
+}
 //
 TGraphErrors   *fGetYlogDerivOnIV       ( const TGraphErrors *fTarget, Bool_t fInverse  =  false )      {
     auto fResult  = new TGraphErrors();
