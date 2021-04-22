@@ -124,6 +124,40 @@ def estimate_Vbd(measurements, Vmax):
 
     return 0.
 
+def fEstimate_Vbd   ( measurements, fInputMaximum ):
+    #
+    #>> Computes First and Second Derivative, finds the first maximum and stops at inflection point
+    fFirstDerivative    =   []
+    fSecondDerivative   =   []
+    fVoltageMaximum     =   fInputMaximum;
+    
+    for iTer in range(len(measurements) - 1):
+        fXcenter    =   0.5 * ( measurements[iTer]["voltage"] + measurements[iTer + 1]["voltage"] )
+        fXdisplace  =   measurements[iTer + 1]["voltage"] - measurements[iTer]["voltage"]
+        fYdisplace  =   measurements[iTer + 1]["current"] - measurements[iTer]["current"]
+        fFirstDev   =   fYdisplace / fXdisplace
+        fFirstDerivative.append ((fXcenter, fFirstDev))
+    
+    for iTer in range(len(fFirstDerivative) - 1):
+        fXcenter    =   0.5 * ( fFirstDerivative[iTer][0] + fFirstDerivative[iTer + 1][0] )
+        fXdisplace  =   ( fFirstDerivative[iTer + 1][0] - fFirstDerivative[iTer][0] )
+        fYdisplace  =   ( fFirstDerivative[iTer + 1][1] - fFirstDerivative[iTer][1] )
+        fSecondDev   =   fYdisplace / fXdisplace
+        fSecondDerivative.append((fXcenter, fSecondDev))
+        
+    for iTer in range(len(fSecondDerivative) - 1):
+        if np.sign(fSecondDerivative[iTer][1]) != np.sign(fSecondDerivative[iTer+1][1]):
+            fVoltageMaximum = fSecondDerivative[iTer+1][0]
+            break;
+            
+            
+    np.sort(fFirstDerivative)
+    for iTer in range( len(fFirstDerivative), 1, -1 ):
+        if fFirstDerivative[iTer-1][0] < fVoltageMaximum:
+            return  fFirstDerivative[iTer][0]
+        
+    return 0.
+
 def write_measurements(measurements, filename):
 
     fout = open(filename, "w")
