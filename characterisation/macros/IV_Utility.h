@@ -38,18 +38,18 @@ Double_t        Vdb                     ( const char   *fFileName,  int method =
 //
 //>>    Get a copy of the Graph with the log derivative of Y-values
 TGraphErrors   *fGetAverage             ( const TGraphErrors *, Int_t );
-TGraphErrors   *fGetAverage             ( const char   *fFileName, Int_t fNpoints ) { return fGetAverage(fSetErrorsOnIV(fFileName),fNpoints); }
-TGraphErrors   *average                 ( const char   *fFileName, Int_t fNpoints ) { return fGetAverage(fSetErrorsOnIV(fFileName),fNpoints); }
+TGraphErrors   *fGetAverage             ( const char   *fFileName, Int_t fNpoints )                     { return fGetAverage(fSetErrorsOnIV(fFileName),fNpoints); }
+TGraphErrors   *average                 ( const char   *fFileName, Int_t fNpoints )                     { return fGetAverage(fSetErrorsOnIV(fFileName),fNpoints); }
 //
 //>>    Get a copy of the Graph with the log derivative of Y-values
 TGraphErrors   *fGetMovingAvg           ( const TGraphErrors *, Int_t );
-TGraphErrors   *fGetMovingAvg           ( const char   *fFileName, Int_t fNpoints ) { return fGetMovingAvg(fSetErrorsOnIV(fFileName),fNpoints); }
-TGraphErrors   *moving_average          ( const char   *fFileName, Int_t fNpoints ) { return fGetMovingAvg(fSetErrorsOnIV(fFileName),fNpoints); }
+TGraphErrors   *fGetMovingAvg           ( const char   *fFileName, Int_t fNpoints )                     { return fGetMovingAvg(fSetErrorsOnIV(fFileName),fNpoints); }
+TGraphErrors   *moving_average          ( const char   *fFileName, Int_t fNpoints )                     { return fGetMovingAvg(fSetErrorsOnIV(fFileName),fNpoints); }
 //
 //>>    Draw a bunch of histos
 void            drawA1                  ();
 void            drawA1B1                ();
 //
 std::pair<double,double> fFindQuenchingResist (TGraphErrors *gIV, double fitmin, double fitmax);
-std::pair<double,double> Rq(TGraphErrors *gIV, double fitmin, double fitmax)                { return fFindQuenchingResist(gIV,fitmin,fitmax); }
-std::pair<double,double> Rq(const char *fFileName, double fitmin = 2, double fitmax = 3)    { return fFindQuenchingResist(fSetErrorsOnIV(fFileName),fitmin,fitmax); }
+std::pair<double,double> Rq(TGraphErrors *gIV, double fitmin, double fitmax)                            { return fFindQuenchingResist(gIV,fitmin,fitmax); }
+std::pair<double,double> Rq(const char *fFileName, double fitmin = 2, double fitmax = 3)                { return fFindQuenchingResist(fSetErrorsOnIV(fFileName),fitmin,fitmax); }
