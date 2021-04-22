@@ -4,50 +4,37 @@
 #include "style.C"
 #include "Datasheet.h"
 //
-//>>    Reference Errors from Ferrara
+//>>    Set Instrumental Errors on IV curves
+TGraphErrors   *fSetErrorsOnIV          ( TGraphErrors *,    Double_t);
+TGraphErrors   *fSetErrorsOnIV          ( const char   *fFileName,  Double_t fScale =   1. )    { return fSetErrorsOnIV(new TGraphErrors(fFileName), fScale); }
 //
-double belowI[6] = {2.e-9, 20.e-9, 200.e-9, 2.e-6, 20.e-6, 200.e-6};
-double percI[6] = {0.003, 0.002, 0.0015, 0.0015, 0.001, 0.001};
-double fixedI[6] = {400.e-15, 1.e-12, 10.e-12, 100.e-12, 1.e-9, 10.e-9};
-
-double percV[1] = {0.001};
-double fixedV[1] = {4.e-3};
-
-//>>    Errors on Keithley #####
-
-
-TGraphErrors *IV(const char *fname, bool invert = false);
-
-TGraphErrors *sqrtIV(const TGraphErrors *gIV);
-TGraphErrors *sqrtIV(const char *fname);
-TGraphErrors *D(const TGraphErrors *gIV);
-TGraphErrors *D(const char *fname);
-TGraphErrors *LD(const TGraphErrors *gIV);
-TGraphErrors *LD(const char *fname);
-TGraphErrors *ILD(const TGraphErrors *gIV);
-TGraphErrors *ILD(const char *fname);
-double Vbd(const TGraphErrors *gIV, int method = 3, double vbd_ini = 24.5);
-double Vbd(const char *fname, int method = 3, double vbd_ini = 24.5);
+//>>    Get a copy of the Graph with the sqrt of Y-values
+TGraphErrors   *fGetYsqrtOnIV           ( const TGraphErrors * );
+TGraphErrors   *fGetYsqrtOnIV           ( const char   *fFileName ) { return fGetYsqrtOnIV(fSetErrorsOnIV(fFileName)); }
+//
+//>>    Get a copy of the Graph with the derivative of Y-values
+TGraphErrors   *fGetYderivativeOnIV     ( const TGraphErrors * );
+TGraphErrors   *fGetYderivativeOnIV     ( const char   *fFileName ) { return fGetYderivativeOnIV(fSetErrorsOnIV(fFileName)); }
+//
+//>>    Get a copy of the Graph with the log derivative of Y-values
+TGraphErrors   *fGetYlogDerivOnIV       ( const TGraphErrors *, Bool_t );
+TGraphErrors   *fGetYlogDerivOnIV       ( const char   *fFileName, Bool_t fInverse = false ) { return fGetYlogDerivOnIV(fSetErrorsOnIV(fFileName),fInverse); }
+//
+//>>    Get a copy of the Graph with the derivative of Y-values
+Double_t        fFindBreakDownV         ( const TGraphErrors *gIV, int method = 3, double vbd_ini = 24.5 );
+Double_t        fFindBreakDownV         ( const char   *fFileName, int method = 3, double vbd_ini = 24.5 ) { return fFindBreakDownV(fSetErrorsOnIV(fFileName),method,vbd_ini); }
+//
+//>>    Get a copy of the Graph with the log derivative of Y-values
+TGraphErrors   *fGetAverage             ( const TGraphErrors *, Int_t );
+TGraphErrors   *fGetAverage             ( const char   *fFileName, Int_t fNpoints ) { return fGetAverage(fSetErrorsOnIV(fFileName),fNpoints); }
+//
+//>>    Get a copy of the Graph with the log derivative of Y-values
+TGraphErrors   *fGetMovingAvg           ( const TGraphErrors *, Int_t );
+TGraphErrors   *fGetMovingAvg           ( const char   *fFileName, Int_t fNpoints ) { return fGetMovingAvg(fSetErrorsOnIV(fFileName),fNpoints); }
+//
+//>>    Draw a bunch of histos
+void            drawA1                  ();
+void            drawA1B1                ();
+//
 std::pair<double,double> Rq(TGraphErrors *gIV, double fitmin, double fitmax);
-std::pair<double,double> Rq(const char *fname, double fitmin = 2, double fitmax = 3);
-TGraphErrors *sqrtIV(const TGraphErrors *gIV);
-
-std::pair<double,double> Rq(TGraphErrors *gIV, double fitmin, double fitmax);
-
-TGraphErrors *D(const TGraphErrors *gIV);
-
-TGraphErrors *LD(const TGraphErrors *gIV);
-TGraphErrors *ILD(const TGraphErrors *gIV);
-
-void
-drawA1();
-void
-drawA1B1();
-
-
-//TGraphErrors *
-//moving_average(TGraphErrors *gin, int n = 2);
-TGraphErrors *
-average(TGraphErrors *gin, int n = 2);
-double
-Vbd(const TGraphErrors *gIV, int method, double vbd_ini);
+std::pair<double,double> Rq(const char *fFileName, double fitmin = 2, double fitmax = 3)    { return Rq(fSetErrorsOnIV(fFileName),fitmin,fitmax); }
