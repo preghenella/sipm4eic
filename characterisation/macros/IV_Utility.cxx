@@ -188,10 +188,9 @@ Double_t        fFindBreakDownV         ( const TGraphErrors *gIV, int method, d
     }
     // !TODO: 1. The numbering scheme is inconsistent
     // !TODO: 2. NAming and labels for methods
-}      // ! TODO !
+}      // ! TODO ! // To be re-checked
 //
-std::pair<double,double> Rq(TGraphErrors *gIV, double fitmin, double fitmax) // To be re-checked
-{
+std::pair<double,double>    fFindQuenchingResist    ( TGraphErrors *gIV, double fitmin, double fitmax)  {
   gIV->Draw("ap*");
   auto pol1 = (TF1 *)gROOT->GetFunction("pol1");
   gIV->Fit(pol1, "", "", fitmin, fitmax);
@@ -200,7 +199,7 @@ std::pair<double,double> Rq(TGraphErrors *gIV, double fitmin, double fitmax) // 
   auto R = 1. / R1;
   auto eR = 1. / R1 / R1 * eR1;
   return std::pair<double,double>(R, eR);
-}
+} // To be re-checked
 //
 void    drawA1()    {
   style();
