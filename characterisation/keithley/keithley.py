@@ -12,31 +12,14 @@ import matplotlib.pyplot as plt
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Connect the socket to the port where the server is listening
-#server_address = ('131.154.12.91', 5025)
+server_address = ('131.154.12.91', 5025)
 #server_address = ('127.0.0.1', 8393)
 #print >>sys.stderr, 'connecting to %s port %s' % server_address
-#sock.connect(server_address)
-
-fCorse  =   True;
-fWide_  =   True;
-fFrwd_  =   True;
-fFine_  =   True;
+sock.connect(server_address)
 
 ### output file tagname
 outfiletagname = ''
 for i in range(1, len(sys.argv)):
-    if ( sys.argv[i] == "NOwide" ):
-        fWide_  =   False
-        continue
-    if ( sys.argv[i] == "NOfine" ):
-        fFine_  =   False
-        continue
-    if ( sys.argv[i] == "NOforward" ):
-        fFrwd_  =   False
-        continue
-    if ( sys.argv[i] == "NOcoarse" ):
-        fCorse  =   False
-        continue
     outfiletagname += sys.argv[i]
     if (i < len(sys.argv) - 1):
         outfiletagname += '_'
@@ -165,39 +148,35 @@ try:
     start = time.time()
 
     ### coarse scan
-    if fCorse:
-        coarse_start = time.time()
-        measurements = scan(Vmin = 10., Vmax = 100, Ilim = 250.e-6, Vstep = 1., Twait = 0.1, Nave = 1, fPlot = ax[0])
-        write_measurements(measurements, outfiletagname + '.coarse.cvs')
-        Vbd = estimate_Vbd(measurements, 30.)
-        coarse_end = time.time()
-        print("--- coarse scan took %f seconds: estimated Vbd = %f" % (coarse_end - coarse_start, Vbd))
+    coarse_start = time.time()
+    measurements = scan(Vmin = 10., Vmax = 100, Ilim = 250.e-6, Vstep = 1., Twait = 0.1, Nave = 1, fPlot = ax[0])
+    write_measurements(measurements, outfiletagname + '.coarse.cvs')
+    Vbd = estimate_Vbd(measurements, 30.)
+    coarse_end = time.time()
+    print("--- coarse scan took %f seconds: estimated Vbd = %f" % (coarse_end - coarse_start, Vbd))
 
     ### wide scan
-    if fWide_:
-        wide_start = time.time()
-        measurements = scan(Vmin = Vbd - 5., Vmax = 100., Ilim = 250.e-6, Vstep = 0.2, Twait = 1., Nave = 3, fPlot = ax[1])
-        write_measurements(measurements, outfiletagname + '.wide.cvs')
-        Vbd = estimate_Vbd(measurements, 30.)
-        wide_end = time.time();
-        print("--- wide scan took %f seconds: estimated Vbd = %f" % (wide_end - wide_start, Vbd))
+    wide_start = time.time()
+    measurements = scan(Vmin = Vbd - 5., Vmax = 100., Ilim = 250.e-6, Vstep = 0.2, Twait = 1., Nave = 3, fPlot = ax[1])
+    write_measurements(measurements, outfiletagname + '.wide.cvs')
+    Vbd = estimate_Vbd(measurements, 30.)
+    wide_end = time.time();
+    print("--- wide scan took %f seconds: estimated Vbd = %f" % (wide_end - wide_start, Vbd))
 
     ### fine scan
-    if fFine_:
-        fine_start = time.time()
-        measurements = scan(Vmin = Vbd - 1., Vmax = Vbd + 2., Ilim = 250.e-6, Vstep = 0.05, Twait = 1., Nave = 10, fPlot = ax[2])
-        write_measurements(measurements, outfiletagname + '.fine.cvs')
-        Vbd = estimate_Vbd(measurements, 30.)
-        fine_end = time.time();
-        print("--- fine scan took %f seconds: estimated Vbd = %f" % (fine_end - fine_start, Vbd))
+    fine_start = time.time()
+    measurements = scan(Vmin = Vbd - 1., Vmax = Vbd + 2., Ilim = 250.e-6, Vstep = 0.05, Twait = 1., Nave = 10, fPlot = ax[2])
+    write_measurements(measurements, outfiletagname + '.fine.cvs')
+    Vbd = estimate_Vbd(measurements, 30.)
+    fine_end = time.time();
+    print("--- fine scan took %f seconds: estimated Vbd = %f" % (fine_end - fine_start, Vbd))
 
     ### forward scan
-    if fFrwd_:
-        forward_start = time.time()
-        measurements = scan(Vmin = 0., Vmax = -3., Ilim = 25.e-3, Vstep = -0.1, Twait = 1., Nave = 3, fPlot = ax[3], fScale = -1.)
-        write_measurements(measurements, outfiletagname + '.forward.cvs')
-        forward_end = time.time();
-        print("--- forward scan took %f seconds" % (forward_end - forward_start))
+    forward_start = time.time()
+    measurements = scan(Vmin = 0., Vmax = -3., Ilim = 25.e-3, Vstep = -0.1, Twait = 1., Nave = 3, fPlot = ax[3], fScale = -1.)
+    write_measurements(measurements, outfiletagname + '.forward.cvs')
+    forward_end = time.time();
+    print("--- forward scan took %f seconds" % (forward_end - forward_start))
     
     ### completed
     end = time.time()
