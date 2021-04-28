@@ -1,0 +1,69 @@
+#! /usr/bin/env python
+
+import keithley as ky
+import sys
+import matplotlib.pyplot as plt
+import datetime
+
+### check input arguments
+if len(sys.argv) < 2:
+    print('--- ERROR: need at least one argument')
+    exit()
+
+### output file tagname
+outfiletagname = ''
+for i in range(1, len(sys.argv)):
+    outfiletagname += sys.argv[i]
+    if (i < len(sys.argv) - 1):
+        outfiletagname += '_'
+print('--- Keithley transition scan program started: %s' % outfiletagname)
+
+### add time tag
+timenow = datetime.datetime.now()
+timetag = timenow.strftime('%Y%m%d%H%M%S')
+outfiletagname += '.' + timetag
+
+### define plots
+plt.ion()
+fig, ax = plt.subplots(1, 1, figsize=(5, 5))
+ax.set_title('transition scan')
+ax.set_xlabel('time (s)')
+ax.set_ylabel('I (A)')
+ax.set_ylim([-2.e-9, 2.e-9])
+fig.tight_layout()
+
+### connect and initialize
+ky.connect()
+ky.initialize()
+ky.read_config()
+
+#######################
+### TRANSITION SCAN ###
+#######################
+
+Vscan = [0., -20., 0.]
+
+### configure source and trigger model
+ky.source_config(Vscan = Vscan)
+ky.trigger_config(Twait = 0., Tstep = 0., Tmeas = 60., Nmeas = 'INF')
+
+### start trigger model and wait
+ky.trigger_init()
+ky.trigger_wait()
+
+### read measurements
+measurements = ky.read_measurements()
+
+### plot measurements
+ky.plot_measurements(measurements, 'REL', 'READ', ax, invertY = True);
+
+### write measurements
+ky.write_measurements(measurements, outfiletagname + '.transition.csv')
+
+### close connection
+ky.close()
+
+### wait for plot
+print('--- plot is ready and saved: waiting for button press')
+plt.savefig(outfiletagname + '.transition.png')
+plt.waitforbuttonpress()
