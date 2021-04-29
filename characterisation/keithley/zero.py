@@ -77,8 +77,6 @@ endtime = time.time()
 print('--- Keithley zero program completed: %f seconds' % (endtime - starttime))
 
 ### wait for plot
-print('--- plot is ready and saved: waiting for button press')
+print('--- plot is ready and saved: waiting 3 seconds')
 plt.savefig(outfiletagname + '.zero.png')
-plt.waitforbuttonpress()
-
-
+time.sleep(3)

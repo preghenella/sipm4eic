@@ -67,6 +67,6 @@ ky.write_commands(outfiletagname + '.transition.scpi')
 ky.close()
 
 ### wait for plot
-print('--- plot is ready and saved: waiting for button press')
+print('--- plot is ready and saved: waiting 3 seconds')
 plt.savefig(outfiletagname + '.transition.png')
-plt.waitforbuttonpress()
+time.sleep(3)
