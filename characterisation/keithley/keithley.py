@@ -4,8 +4,7 @@ import os
 import matplotlib.pyplot as plt
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#server_address = ('131.154.12.91', 5025)
-server_address = ('127.0.0.1', 8392)
+server_address = ('131.154.12.91', 5025)
 idn_tag = "KEITHLEY INSTRUMENTS,MODEL 2450,04474830,1.6.7c"
 
 echo = False
