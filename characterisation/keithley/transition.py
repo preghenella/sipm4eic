@@ -60,6 +60,9 @@ ky.plot_measurements(measurements, 'REL', 'READ', ax, invertY = True);
 ### write measurements
 ky.write_measurements(measurements, outfiletagname + '.transition.csv')
 
+### write commands
+ky.write_commands(outfiletagname + '.transition.scpi')
+
 ### close connection
 ky.close()
 
