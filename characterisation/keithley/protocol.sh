@@ -97,7 +97,7 @@ arg="${board} #${serial} ${temperature}K ${channel}"
 tag="${board}_#${serial}_${temperature}K_${channel}"
 mkdir -p $tag
 if [ -d "/data/sipm4eic" ]; then
-    mkdir -p $tag
+    mkdir -p /data/sipm4eic/$tag
 fi
 
 echo "====================================================="
@@ -105,7 +105,7 @@ echo
 
 ./zero.py $arg
 if [ -d "/data/sipm4eic" ]; then
-    cp $tag.*.zero.* $tag/.
+    cp $tag.*.zero.* /data/sipm4eic/$tag/.
 fi
 mv $tag.*.zero.* $tag/.
 
@@ -116,7 +116,7 @@ echo
 
 ./ivscan.py $arg
 if [ -d "/data/sipm4eic" ]; then
-    cp $tag.*.ivscan.* $tag/.
+    cp $tag.*.ivscan.* /data/sipm4eic/$tag/.
 fi
 mv $tag.*.ivscan.* $tag/.
 
@@ -126,7 +126,7 @@ echo
 
 ./fwdscan.py $arg
 if [ -d "/data/sipm4eic" ]; then
-    cp $tag.*.fwdscan.* $tag/.
+    cp $tag.*.fwdscan.* /data/sipm4eic/$tag/.
 fi
 mv $tag.*.fwdscan.* $tag/.
 
