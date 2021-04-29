@@ -3,6 +3,7 @@
 import keithley as ky
 import sys
 import matplotlib.pyplot as plt
+import time
 import datetime
 
 ### check input arguments
