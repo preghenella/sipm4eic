@@ -16,7 +16,10 @@ for i in range(1, len(sys.argv)):
     outfiletagname += sys.argv[i]
     if (i < len(sys.argv) - 1):
         outfiletagname += '_'
-print('--- Keithley transition scan program started: %s' % outfiletagname)
+
+### start
+starttime = time.time()
+print('--- Keithley \'transition\' program started: %s' % outfiletagname)
 
 ### add time tag
 timenow = datetime.datetime.now()
@@ -65,6 +68,10 @@ ky.write_commands(outfiletagname + '.transition.scpi')
 
 ### close connection
 ky.close()
+
+### done
+endtime = time.time()
+print('--- Keithley \'transition\' program completed: %f seconds' % (endtime - starttime))
 
 ### wait for plot
 print('--- plot is ready and saved: waiting for 5 seconds')

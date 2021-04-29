@@ -28,7 +28,7 @@ for i in range(1, len(sys.argv)):
 
 ### start
 starttime = time.time()
-print('--- Keithley IV scan program started: %s' % outfiletagname)
+print('--- Keithley \'ivscan\' program started: %s' % outfiletagname)
 
 ### add time tag
 timenow = datetime.datetime.now()
@@ -94,7 +94,7 @@ ky.close()
 
 ### done
 endtime = time.time()
-print('--- Keithley IV scan program completed: %f seconds' % (endtime - starttime))
+print('--- Keithley \'ivscan\' program completed: %f seconds' % (endtime - starttime))
 
 ### wait for plot
 print('--- plot is ready and saved: waiting for 5 seconds')
