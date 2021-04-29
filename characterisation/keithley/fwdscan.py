@@ -27,9 +27,9 @@ starttime = time.time()
 print('--- Keithley \'fwdscan\' program started: %s' % outfiletagname)
 
 ### add time tag
-timenow = datetime.datetime.now()
-timetag = timenow.strftime('%Y%m%d%H%M%S')
-outfiletagname += '.' + timetag
+#timenow = datetime.datetime.now()
+#timetag = timenow.strftime('%Y%m%d%H%M%S')
+#outfiletagname += '.' + timetag
 
 ### define plots
 plt.ion()
