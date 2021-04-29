@@ -126,15 +126,15 @@ def measure_config(name = 'MEASURE_CONFIG'):
     send('SENS:CURR:AVER OFF')
     send('SENS:CONF:LIST:STOR \"{name}\"'.format(name = name))
     
-def source_config(Vscan, name = 'SOURCE_CONFIG', verbose = False):
+def source_config(Vscan, Ilim = 25.e-6, name = 'SOURCE_CONFIG', verbose = False):
     
 #    send('SOUR:CONF:LIST:DEL \"SOURCE_CONFIG\"')
     send('SOUR:CONF:LIST:CRE \"{name}\"'.format(name = name))
-    
+
+    send('SOUR:VOLT:ILIM {Ilim}'.format(Ilim = Ilim))
     for V in Vscan:
 #        send('SOUR:VOLT:RANG {V}'.format(V = V))
         send('SOUR:VOLT:LEV {V}'.format(V = V))
-#        send('SOUR:VOLT:ILIM {Ilim}'.format(Ilim = Ilim))
         send('SOUR:CONF:LIST:STOR \"{name}\"'.format(name = name))
 
     if (verbose):
