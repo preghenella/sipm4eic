@@ -77,6 +77,6 @@ endtime = time.time()
 print('--- Keithley zero program completed: %f seconds' % (endtime - starttime))
 
 ### wait for plot
-print('--- plot is ready and saved: waiting 3 seconds')
+print('--- plot is ready and saved: waiting for 5 seconds')
 plt.savefig(outfiletagname + '.zero.png')
 time.sleep(3)
