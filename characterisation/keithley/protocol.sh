@@ -93,8 +93,8 @@ echo "     channel = ${channel}"
 echo
 echo "====================================================="
 
-arg="${board} #${serial} ${temperature}K ${channel}"
-tag="${board}_#${serial}_${temperature}K_${channel}"
+arg="${board} sn${serial} ${temperature}K ${channel}"
+tag="${board}_sn${serial}_${temperature}K_${channel}"
 mkdir -p $tag
 if [ -d "/data/sipm4eic" ]; then
     mkdir -p /data/sipm4eic/$tag
