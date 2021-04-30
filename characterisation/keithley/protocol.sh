@@ -107,7 +107,7 @@ echo
 if [ -d "/data/sipm4eic" ]; then
     cp $tag.*.zero.* /data/sipm4eic/$tag/.
 fi
-mv $tag.*.zero.* $tag/.
+mv $tag.zero.* $tag/.
 
 
 echo
@@ -116,9 +116,9 @@ echo
 
 ./ivscan.py $arg
 if [ -d "/data/sipm4eic" ]; then
-    cp $tag.*.ivscan.* /data/sipm4eic/$tag/.
+    cp $tag.ivscan.* /data/sipm4eic/$tag/.
 fi
-mv $tag.*.ivscan.* $tag/.
+mv $tag.ivscan.* $tag/.
 
 echo
 echo "====================================================="
@@ -126,9 +126,9 @@ echo
 
 ./fwdscan.py $arg
 if [ -d "/data/sipm4eic" ]; then
-    cp $tag.*.fwdscan.* /data/sipm4eic/$tag/.
+    cp $tag.fwdscan.* /data/sipm4eic/$tag/.
 fi
-mv $tag.*.fwdscan.* $tag/.
+mv $tag.fwdscan.* $tag/.
 
 echo
 echo "====================================================="
