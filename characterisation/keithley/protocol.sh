@@ -105,7 +105,7 @@ echo
 
 ./zero.py $arg
 if [ -d "/data/sipm4eic" ]; then
-    cp $tag.*.zero.* /data/sipm4eic/$tag/.
+    cp $tag.zero.* /data/sipm4eic/$tag/.
 fi
 mv $tag.zero.* $tag/.
 
