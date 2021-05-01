@@ -43,7 +43,7 @@ Vscan = [0., -20., 0.]
 
 ### configure source and trigger model
 ky.source_config(Vscan = Vscan)
-ky.trigger_config(Twait = 0., Tstep = 0., Tmeas = 60., Nmeas = 'INF')
+ky.trigger_config(Twait = 0., Tstep = 0., Tmeas = 30., Nmeas = 'INF')
 
 ### start trigger model and wait
 ky.trigger_init()
