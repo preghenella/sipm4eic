@@ -10,13 +10,27 @@ import time
 ### parse arguments
 args = ky.parse_arguments()
 
-
 ### output file run tag
 outfiletagname = ky.build_tagname(args)
 
 ### start
 starttime = time.time()
 print('--- Keithley \'ivscan\' program started: %s' % outfiletagname)
+
+### Vbd reference values from datasheet
+Vbd_refV = {'SENSL' : 24.5  , 'BCOM' : 26.9  , 'FBK' : 32.0  }
+Vbd_refT = {'SENSL' : 21.0  , 'BCOM' : 25.0  , 'FBK' : 24.0  }
+Vbd_coef = {'SENSL' : 0.021 , 'BCOM' : 0.025 , 'FBK' : 0.035 }
+
+### calculate expected Vbd
+refV = Vbd_refV[args.board]
+refT = Vbd_refT[args.board]
+coef = Vbd_coef[args.board]
+Vbd = refV + coef * (args.temperature - 273 - refT)
+print('--- calculate expected Vbd for {board} at T = {temperature} K'.format(board = args.board, temperature = args.temperature))
+print('--- Vbd = {Vbd} V (refV = {refV}, refT = {refT}, coef = {coef})'.format(Vbd = Vbd, refV = refV, refT = refT, coef = coef))
+Vbd = round(Vbd, 1)
+print('--- rounding at first decimal: Vbd = {Vbd}'.format(Vbd = Vbd))
 
 ### add time tag
 #timenow = datetime.datetime.now()
