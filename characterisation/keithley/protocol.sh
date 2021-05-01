@@ -96,17 +96,11 @@ echo "====================================================="
 arg="${board} sn${serial} ${temperature}K ${channel}"
 tag="${board}_sn${serial}_${temperature}K_${channel}"
 mkdir -p $tag
-if [ -d "/data/sipm4eic" ]; then
-    mkdir -p /data/sipm4eic/$tag
-fi
 
 echo "====================================================="
 echo
 
-./zero.py $arg
-if [ -d "/data/sipm4eic" ]; then
-    cp $tag.zero.* /data/sipm4eic/$tag/.
-fi
+./zero.py --board $board --serial $serial --temperature $temperature --channel $channel
 mv $tag.zero.* $tag/.
 
 
@@ -114,21 +108,27 @@ echo
 echo "====================================================="
 echo
 
-./ivscan.py $arg
-if [ -d "/data/sipm4eic" ]; then
-    cp $tag.ivscan.* /data/sipm4eic/$tag/.
-fi
+./ivscan.py --board $board --serial $serial --temperature $temperature --channel $channel
 mv $tag.ivscan.* $tag/.
 
 echo
 echo "====================================================="
 echo
 
-./fwdscan.py $arg
-if [ -d "/data/sipm4eic" ]; then
-    cp $tag.fwdscan.* /data/sipm4eic/$tag/.
-fi
+./fwdscan.py --board $board --serial $serial --temperature $temperature --channel $channel
 mv $tag.fwdscan.* $tag/.
 
 echo
 echo "====================================================="
+echo
+
+if [ -d "/data/sipm4eic" ]; then
+    echo
+    echo " copying everything to /data/sipm4eic"
+    mkdir -p /data/sipm4eic/
+    cp -rp $tag /data/sipm4eic
+fi
+
+echo
+echo "====================================================="
+echo

@@ -2,6 +2,7 @@ import socket
 import numpy as np
 import os
 import matplotlib.pyplot as plt
+import argparse
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_address = ('131.154.12.91', 5025)
@@ -10,6 +11,65 @@ idn_tag = "KEITHLEY INSTRUMENTS,MODEL 2450,04474830,1.6.7c"
 echo = False
 log = True
 commands = []
+
+def parse_arguments():
+    
+    ### choices
+    boards = ['SENSL', 'BCOM', 'FBK']
+    temperatures = [293, 283, 273, 263, 253, 243]
+    channels = [row + column
+                for row in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+                for column in ['1', '2', '3', '4']]
+    
+    ### arguments
+    parser = argparse.ArgumentParser(description='Keithley ivscan program',
+                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+
+    parser.add_argument('--board',
+                        type=str,
+                        required=True,
+                        choices=boards,
+                        help='Board name')
+    
+    parser.add_argument('--serial',
+                        type=int,
+                        required=True,
+                        help='Board serial number')
+    
+    parser.add_argument('--temperature',
+                        type=int,
+                        required=True,
+                        choices=temperatures,
+                        help='Temperature in Kelvin')
+    
+    parser.add_argument('--channel',
+                        type=str,
+                        required=True,
+                        choices=channels,
+                        help='Board channel')
+    
+    parser.add_argument('--notes',
+                        type=str,
+                        required=False,
+                        default=None,
+                        action='append',
+                        nargs='+',
+                        help='Additional notes')
+    
+    args = parser.parse_args()
+
+    return args
+
+def build_tagname(args):
+    tagname = args.board
+    tagname += '_sn' + str(args.serial)
+    tagname += '_' + str(args.temperature) + 'K'
+    tagname += '_' + args.channel
+    if args.notes is not None:
+        for notes in args.notes:
+            for note in notes:
+                tagname += '_' + note
+    return tagname
 
 def connect():
     sock.connect(server_address)

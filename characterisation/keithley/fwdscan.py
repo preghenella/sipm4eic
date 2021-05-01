@@ -7,20 +7,11 @@ import matplotlib.pyplot as plt
 import datetime
 import time
 
-ky.echo = False
-ky.log = True
-
-### check input arguments
-if len(sys.argv) < 2:
-    print('--- ERROR: need at least one argument')
-    exit()
+### parse arguments
+args = ky.parse_arguments()
 
 ### output file run tag
-outfiletagname = ''
-for i in range(1, len(sys.argv)):
-    outfiletagname += sys.argv[i]
-    if (i < len(sys.argv) - 1):
-        outfiletagname += '_'
+outfiletagname = ky.build_tagname(args)
 
 ### start
 starttime = time.time()

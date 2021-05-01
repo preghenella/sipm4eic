@@ -4,17 +4,16 @@ import keithley as ky
 import sys
 import datetime
 
-### check input arguments
-if len(sys.argv) < 2:
-    print('--- ERROR: need at least one argument')
-    exit()
+### parse arguments
+args = ky.parse_arguments()
 
-### output file tagname
-outfiletagname = ''
-for i in range(1, len(sys.argv)):
-    outfiletagname += sys.argv[i]
-    if (i < len(sys.argv) - 1):
-        outfiletagname += '_'
+### hardcoded settings (valid for SensL)
+Vbd = 24.5
+
+### output file run tag
+outfiletagname = ky.build_tagname(args)
+
+### start
 print('--- Keithley stability scan program started: tagname = %s' % outfiletagname)
 
 ### add time tag
