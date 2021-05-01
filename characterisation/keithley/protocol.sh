@@ -5,6 +5,11 @@ for I in SENSL BCOM HAMA1 HAMA2 FBK; do
     valid_boards[$I]=1
 done
 
+declare -A valid_temperatures
+for I in 293 283 273 263 253 243; do
+    valid_temperatures[$I]=1
+done
+
 declare -A valid_channels
 for I in A B C D E F G H; do
     for J in 1 2 3 4; do
@@ -33,6 +38,9 @@ banner() {
     echo " HAMA2"
     echo " FBK"
     echo
+    echo " valid temperatures are"
+    echo
+    
     echo " valid channel names are"
     echo
     echo " A1 A2 A3 A4"
@@ -64,6 +72,16 @@ channel=$4
 if [[ ! ${valid_boards[$board]} ]]; then
     echo
     echo " invalid board name: $board"
+    echo
+    echo " usage: ./protocol.sh [board] [serial] [temperature] [channel]"
+    echo
+    exit 1
+fi
+
+### check valid temperature
+if [[ ! ${valid_temperatures[$temperature]} ]]; then
+    echo
+    echo " invalid temperature: $temperature"
     echo
     echo " usage: ./protocol.sh [board] [serial] [temperature] [channel]"
     echo
