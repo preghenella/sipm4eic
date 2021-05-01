@@ -17,7 +17,6 @@ if len(sys.argv) < 2:
 
 ### hardcoded settings (valid for SensL)
 Vbd = 24.5
-Vlim = 35.0
 
 ### output file run tag
 outfiletagname = ''
@@ -63,9 +62,9 @@ Vmin  = Vbd - 1.
 Vmax  = Vbd + 2.
 Vstep = 0.050
 Vscan = np.append(Vscan, np.arange(Vmin, Vmax, Vstep))
-### [Vbd + 2, Vlim] in 200 mV steps
+### [Vbd + 2, Vbd + 10] in 200 mV steps
 Vmin  = Vbd + 2.
-Vmax  = Vlim
+Vmax  = Vbd + 10.
 Vstep = 0.200
 Vscan = np.append(Vscan, np.arange(Vmin, Vmax, Vstep))
 
