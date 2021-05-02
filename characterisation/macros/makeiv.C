@@ -28,7 +28,8 @@ makeiv(const std::string fnivscan, const std::string fnzero, bool invertX = true
   for (int i = 0; i < givscan->GetN(); ++i)
     pivscan->Fill(givscan->GetX()[i], givscan->GetY()[i]);
 
-  /** write as TGraphErrors **/
+  /** write as TH1 and TGraphErrors **/
+  auto hivscan = new TH1F("hivscan", "", 10001, -0.005, 100.005);
   auto gout = new TGraphErrors;
   auto npoints = 0;
   for (int i = 0; i < pivscan->GetNbinsX(); ++i) {
@@ -40,6 +41,8 @@ makeiv(const std::string fnivscan, const std::string fnzero, bool invertX = true
     eval = std::sqrt(eval * eval + ezero * ezero);
     gout->SetPoint(npoints, cen, val);
     gout->SetPointError(npoints, 0., eval);
+    hivscan->SetBinContent(i + 1, val);
+    hivscan->SetBinError(i + 1, eval);
     npoints++;
   }
   auto lastindex = fnivscan.find_last_of("."); 
@@ -47,6 +50,8 @@ makeiv(const std::string fnivscan, const std::string fnzero, bool invertX = true
   std::cout << " --- writing output file: " << fnout << std::endl;
   auto fout = TFile::Open(fnout.c_str(), "RECREATE");
   gout->Write("ivscan");
+  hivscan->Write("hivscan");
+  
   fout->Close();
   
   return gout;
