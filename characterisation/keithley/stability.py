@@ -30,9 +30,9 @@ ky.read_config()
 ### STABILITY SCAN ###
 ######################
 
-Vscan = [-27.]
+Vscan = [-20.]
 ky.source_config(Vscan = Vscan)
-ky.trigger_config(Twait = 0., Tstep = 0., Tmeas = 60., Nmeas = 'INF')
+ky.trigger_config(Twait = 0., Tstep = 0., Tmeas = 300., Nmeas = 'INF')
 
 ### continuous scan
 while True:
