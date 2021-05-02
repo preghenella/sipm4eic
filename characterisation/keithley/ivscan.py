@@ -73,7 +73,7 @@ Vscan = np.append(Vscan, np.arange(Vmin, Vmax, Vstep))
 
 ### configure source and trigger model
 ky.source_config(Vscan = -Vscan)
-ky.trigger_config(Twait = 30., Tstep = 1., Tmeas = 0., Nmeas = 25)
+ky.trigger_config(Twait = 30., Tstep = 0.5, Tmeas = 0., Nmeas = 25)
 
 ### start trigger model and wait
 ky.trigger_init()
