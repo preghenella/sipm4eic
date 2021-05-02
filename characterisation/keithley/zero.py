@@ -41,8 +41,8 @@ ky.read_config()
 ########################
 
 ### configure source and trigger model
-ky.source_config(Vscan = [0.])
-ky.trigger_config(Twait = 30., Tstep = 0., Tmeas = 30., Nmeas = 'INF')
+ky.source_measure_config(Vscan = [0.])
+ky.trigger_config(Twait = 10., Tstep = 0., Tmeas = 30., Nmeas = 'INF')
 
 ### start trigger model and wait
 ky.trigger_init()

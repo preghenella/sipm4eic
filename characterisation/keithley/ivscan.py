@@ -22,6 +22,10 @@ Vbd_refV = {'SENSL' : 24.5  , 'BCOM' : 26.9  , 'FBK' : 32.0  }
 Vbd_refT = {'SENSL' : 21.0  , 'BCOM' : 25.0  , 'FBK' : 24.0  }
 Vbd_coef = {'SENSL' : 0.021 , 'BCOM' : 0.025 , 'FBK' : 0.035 }
 
+### temperature dependent optimisation
+NaverT = {293 : 1 , 283 : 1 , 273 : 2 , 263 : 2 , 253 : 4 , 243 : 4}
+Naver = NaverT[args.temperature]
+
 ### calculate expected Vbd
 refV = Vbd_refV[args.board]
 refT = Vbd_refT[args.board]
@@ -55,24 +59,15 @@ ky.read_config()
 ### REVERSE BIAS SCAN ###
 #########################
 
-### [Vbd - 5, Vbd - 1] in 200 mV steps
+### [Vbd - 2, Vbd + 10] in 200 mV steps
 Vmin  = Vbd - 2.
-Vmax  = Vbd - 1.
-Vstep = 0.200
-Vscan = np.arange(Vmin, Vmax, Vstep)
-### [Vbd - 1, Vbd + 2] in 50 mV steps
-Vmin  = Vbd - 1.
-Vmax  = Vbd + 2.
-Vstep = 0.050
-Vscan = np.append(Vscan, np.arange(Vmin, Vmax, Vstep))
-### [Vbd + 2, Vbd + 10] in 200 mV steps
-Vmin  = Vbd + 2.
 Vmax  = Vbd + 10.
 Vstep = 0.200
-Vscan = np.append(Vscan, np.arange(Vmin, Vmax, Vstep))
+Vscan = np.arange(Vmin, Vmax, Vstep)
+Vsmart = [Vbd, Vbd + 5.]
 
-### configure source and trigger model
-ky.source_config(Vscan = -Vscan)
+### configure source, measure and trigger model
+ky.source_measure_config(Vscan = Vscan, Ilim = 25.e-6, reverse = True, Vsmart = Vsmart, Naver = Naver)
 ky.trigger_config(Twait = 30., Tstep = 0.5, Tmeas = 0., Nmeas = 25)
 
 ### start trigger model and wait

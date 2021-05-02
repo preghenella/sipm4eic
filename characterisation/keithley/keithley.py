@@ -174,29 +174,28 @@ def plot_measurements(measurements, xkey, ykey, ax, invertX = False, invertY = F
     plt.draw()
     plt.pause(0.1)
 
-def measure_config(name = 'MEASURE_CONFIG'):
-    print('--- configuring the measure list')
-
-    send('SENS:CURR:AVER:COUNT 10')
-    send('SENS:CURR:AVER:TCON REP')
-    send('SENS:CURR:AVER ON')
-    send('SENS:CONF:LIST:STOR \"{name}\"'.format(name = name))
-
-    send('SENS:CURR:AVER:COUNT 10')
-    send('SENS:CURR:AVER:TCON REP')
-    send('SENS:CURR:AVER OFF')
-    send('SENS:CONF:LIST:STOR \"{name}\"'.format(name = name))
+def source_measure_config(Vscan, Ilim = 25.e-6, reverse = False, Vsmart = None, Naver = 4, verbose = False):
+    print('--- configuring the source and measure list: Vsmart = {Vsmart}, Naver = {Naver}'.format(Vsmart = Vsmart, Naver = Naver))
     
-def source_config(Vscan, Ilim = 25.e-6, name = 'SOURCE_CONFIG', verbose = False):
-    
-#    send('SOUR:CONF:LIST:DEL \"SOURCE_CONFIG\"')
-    send('SOUR:CONF:LIST:CRE \"{name}\"'.format(name = name))
+    send('SOUR:CONF:LIST:CRE \"SOURCE_CONFIG\"')
+    send('SENS:CONF:LIST:CRE \"MEASURE_CONFIG\"')
 
-#    send('SOUR:VOLT:ILIM {Ilim}'.format(Ilim = Ilim))
+    send('SOUR:VOLT:ILIM {Ilim}'.format(Ilim = Ilim))
+    
     for V in Vscan:
-#        send('SOUR:VOLT:RANG {V}'.format(V = V))
-        send('SOUR:VOLT:LEV {V}'.format(V = V))
-        send('SOUR:CONF:LIST:STOR \"{name}\"'.format(name = name))
+        V = round(V, 3)
+        ### source config
+        if reverse:
+            send('SOUR:VOLT:LEV {V}'.format(V = -V))
+        else:
+            send('SOUR:VOLT:LEV {V}'.format(V = V))
+        send('SOUR:CONF:LIST:STOR \"SOURCE_CONFIG\"')
+        ### measure config
+        if Vsmart is None or V < Vsmart[0] or V > Vsmart[1]:
+            send('SENS:CURR:AVER:COUNT 1')
+        else:
+            send('SENS:CURR:AVER:COUNT {Naver}'.format(Naver = Naver))
+        send('SENS:CONF:LIST:STOR \"MEASURE_CONFIG\"')
 
     if (verbose):
         query_source_config(name)
@@ -229,20 +228,22 @@ def trigger_config(Twait = 60., Tstep = 1., Tmeas = 1., Nmeas = 'INF', name = 'S
     ### configure the trigger model
     send('TRIG:LOAD \"EMPTY\"')
     send('TRIG:BLOC:BUFF:CLEAR 1, \"defbuffer1\"')
-    send('TRIG:BLOC:CONF:REC 2, \"{name}\", 1'.format(name = name))
-    send('TRIG:BLOC:SOUR:STAT 3, ON')
-    send('TRIG:BLOC:DEL:CONS 4, {Twait}'.format(Twait = Twait))
-    send('TRIG:BLOC:BRAN:ALW 5, 8')
-    send('TRIG:BLOC:CONF:NEXT 6, \"{name}\"'.format(name = name))
-    send('TRIG:BLOC:DEL:CONS 7, {Tstep}'.format(Tstep = Tstep))
-    send('TRIG:BLOC:BRAN:EVEN 8, SLIM, 15')
-    send('TRIG:BLOC:MEAS 9, \"defbuffer1\", {Nmeas}'.format(Nmeas = Nmeas))
-    send('TRIG:BLOC:DEL:CONS 10, {Tmeas}'.format(Tmeas = Tmeas))
-    send('TRIG:BLOC:MEAS 11, \"defbuffer1\", 0')
-    send('TRIG:BLOC:BRAN:COUN 12, {npoints}, 6'.format(npoints = npoints))
-    send('TRIG:BLOC:SOUR:STAT 13, OFF')
-    send('TRIG:BLOC:BRAN:ALW 14, 0')
+    send('TRIG:BLOC:CONF:REC 2, \"SOURCE_CONFIG\", 1')
+    send('TRIG:BLOC:CONF:REC 3, \"MEASURE_CONFIG\", 1')
+    send('TRIG:BLOC:SOUR:STAT 4, ON')
+    send('TRIG:BLOC:DEL:CONS 5, {Twait}'.format(Twait = Twait))
+    send('TRIG:BLOC:BRAN:ALW 6, 10')
+    send('TRIG:BLOC:CONF:NEXT 7, \"SOURCE_CONFIG\"')
+    send('TRIG:BLOC:CONF:NEXT 8, \"MEASURE_CONFIG\"')
+    send('TRIG:BLOC:DEL:CONS 9, {Tstep}'.format(Tstep = Tstep))
+    send('TRIG:BLOC:BRAN:EVEN 10, SLIM, 17')
+    send('TRIG:BLOC:MEAS 11, \"defbuffer1\", {Nmeas}'.format(Nmeas = Nmeas))
+    send('TRIG:BLOC:DEL:CONS 12, {Tmeas}'.format(Tmeas = Tmeas))
+    send('TRIG:BLOC:MEAS 13, \"defbuffer1\", 0')
+    send('TRIG:BLOC:BRAN:COUN 14, {npoints}, 7'.format(npoints = npoints))
     send('TRIG:BLOC:SOUR:STAT 15, OFF')
+    send('TRIG:BLOC:BRAN:ALW 16, 0')
+    send('TRIG:BLOC:SOUR:STAT 17, OFF')
 
     ### print the setting of the trigger model
     if (verbose):
