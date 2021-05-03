@@ -61,7 +61,7 @@ ky.read_config()
 
 ### [Vbd - 2, Vbd + 10] in 200 mV steps
 Vmin  = Vbd - 2.
-Vmax  = Vbd + 10.
+Vmax  = Vbd + 15.
 Vstep = 0.200
 Vscan = np.arange(Vmin, Vmax, Vstep)
 Vsmart = [Vbd, Vbd + 5.]
