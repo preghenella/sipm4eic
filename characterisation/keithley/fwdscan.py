@@ -71,6 +71,7 @@ ky.close()
 
 ### done
 endtime = time.time()
+print('\a')
 print('--- Keithley \'fwdscan\' program completed: %f seconds' % (endtime - starttime))
 
 ### wait for plot

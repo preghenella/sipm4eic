@@ -147,6 +147,20 @@ if [ -d "/data/sipm4eic" ]; then
     cp -rp $tag /data/sipm4eic
 fi
 
+### end protocol
+
 echo
 echo "====================================================="
 echo
+echo " ending protocol"
+echo
+echo " press ctrl-c to interrupt"
+echo
+echo "====================================================="
+
+### beep and sleep
+
+while 1; do
+    echo -e '\a'
+    sleep 1
+done

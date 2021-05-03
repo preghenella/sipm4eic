@@ -91,6 +91,7 @@ ky.close()
 
 ### done
 endtime = time.time()
+print('\a')
 print('--- Keithley \'ivscan\' program completed: %f seconds' % (endtime - starttime))
 
 ### wait for plot
