@@ -160,7 +160,7 @@ echo "====================================================="
 
 ### beep and sleep
 
-while 1; do
+while true; do
     echo -e '\a'
     sleep 1
 done
