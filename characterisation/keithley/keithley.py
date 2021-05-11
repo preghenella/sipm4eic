@@ -14,8 +14,8 @@ commands = []
 
 def parse_arguments():
     
-    ### choices
-    boards = ['SENSL', 'BCOM', 'FBK']
+    ### choices 
+    boards = ['SENSL', 'BCOM', 'FBK', 'HAMA1']
     temperatures = [293, 283, 273, 263, 253, 243]
     channels = [row + column
                 for row in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']

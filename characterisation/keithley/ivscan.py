@@ -18,9 +18,9 @@ starttime = time.time()
 print('--- Keithley \'ivscan\' program started: %s' % outfiletagname)
 
 ### Vbd reference values from datasheet
-Vbd_refV = {'SENSL' : 24.5  , 'BCOM' : 26.9  , 'FBK' : 32.0  }
-Vbd_refT = {'SENSL' : 21.0  , 'BCOM' : 25.0  , 'FBK' : 24.0  }
-Vbd_coef = {'SENSL' : 0.021 , 'BCOM' : 0.025 , 'FBK' : 0.035 }
+Vbd_refV = {'SENSL' : 24.5  , 'BCOM' : 26.9  , 'FBK' : 32.0  , 'HAMA1' : 53.0 }
+Vbd_refT = {'SENSL' : 21.0  , 'BCOM' : 25.0  , 'FBK' : 24.0  , 'HAMA1' : 25.0 }
+Vbd_coef = {'SENSL' : 0.021 , 'BCOM' : 0.025 , 'FBK' : 0.035 , 'HAMA1' : 0.054 }
 
 ### temperature dependent optimisation
 NaverT = {293 : 1 , 283 : 1 , 273 : 2 , 263 : 2 , 253 : 4 , 243 : 4}
