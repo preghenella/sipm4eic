@@ -17,6 +17,27 @@ for I in A B C D E F G H; do
     done
 done
 
+done=0
+ctrlc=0
+function handle_int {
+    if [[ $ctrlc == 1 ]]; then
+	echo " looks like you are in danger, I quit"
+	echo
+        exit 1
+    fi
+    if [[ $done == 1 ]]; then
+	exit 0
+    fi
+    let ctrlc++
+    echo " don't do that, interrupting the protocol while running is dangerous"
+    echo " please, wait until it is complete and hit CTRL+C when asked"
+    echo " unless you are really in danger, in that case hit CTRL+C again"
+    echo
+}
+
+#trap handle_int SIGINT
+trap '' INT
+
 banner() {
     echo "====================================================="
     echo
@@ -105,8 +126,8 @@ echo
 echo " starting protocol"
 echo
 echo "      board  = ${board}"
-echo "      serial = #${serial}"
-echo " temperature = ${temperature}K"
+echo "      serial = ${serial}"
+echo " temperature = ${temperature} K"
 echo "     channel = ${channel}"
 echo
 echo "====================================================="
@@ -118,7 +139,7 @@ mkdir -p $tag
 echo "====================================================="
 echo
 
-./zero.py --board $board --serial $serial --temperature $temperature --channel $channel
+#./zero.py --board $board --serial $serial --temperature $temperature --channel $channel
 mv $tag.zero.* $tag/.
 
 
@@ -126,14 +147,14 @@ echo
 echo "====================================================="
 echo
 
-./ivscan.py --board $board --serial $serial --temperature $temperature --channel $channel
+#./ivscan.py --board $board --serial $serial --temperature $temperature --channel $channel
 mv $tag.ivscan.* $tag/.
 
 echo
 echo "====================================================="
 echo
 
-./fwdscan.py --board $board --serial $serial --temperature $temperature --channel $channel
+#./fwdscan.py --board $board --serial $serial --temperature $temperature --channel $channel
 mv $tag.fwdscan.* $tag/.
 
 echo
@@ -154,13 +175,27 @@ echo "====================================================="
 echo
 echo " ending protocol"
 echo
+echo "      board  = ${board}"
+echo "      serial = ${serial}"
+echo " temperature = ${temperature} K"
+echo "     channel = ${channel}"
+echo
 echo " press ctrl-c to interrupt"
 echo
 echo "====================================================="
 
 ### beep and sleep
 
+<<<<<<< Updated upstream
 while true; do
     echo -e '\a'
     sleep 1
+=======
+sleep 10
+
+done=1
+while true; do
+    echo -e -n '\a'
+    sleep 0.75
+>>>>>>> Stashed changes
 done
