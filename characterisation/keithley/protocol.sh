@@ -143,8 +143,8 @@ echo
 if [ -d "/data/sipm4eic" ]; then
     echo
     echo " copying everything to /data/sipm4eic"
-    mkdir -p /data/sipm4eic/
-    cp -rp $tag /data/sipm4eic
+    mkdir -p /data/sipm4eic/DISORDER
+    cp -rp $tag /data/sipm4eic/DISORDER/.
 fi
 
 ### end protocol
