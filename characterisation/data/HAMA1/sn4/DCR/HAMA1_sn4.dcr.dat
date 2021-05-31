@@ -1,0 +1,114 @@
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      293     53.00	2.00	 0.1
+# channel counts
+A1	  9526
+A2	  10414
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      293     55.00	4.00	 0.1
+# channel counts
+A1	  15316
+A2	  16560
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      293     57.00	6.00	 0.1
+# channel counts
+A1	  20235
+A2	  21142
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      293     53.80	2.00	 0.1
+# channel counts
+B1	  18134
+B2	  18621
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      293     55.80	4.00	 0.1
+# channel counts
+B1	  33099
+B2	  33755
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      293     57.80	6.00	 0.1
+# channel counts
+B1	  47638
+B2	  48098
+
+###########
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      263     51.35	2.00	 0.5
+# channel counts
+A1	  2055
+A2	  2529
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      263     53.35	4.00	 0.5
+# channel counts
+A1	  4043
+A2	  4512
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      263     55.35	6.00	 0.5
+# channel counts
+A1	  5973
+A2	  6474
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      263     52.15	2.00	 0.5
+# channel counts
+B1	  6021
+B2	  6146
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      263     54.15	4.00	 0.5
+# channel counts
+B1	  11639
+B2	  12692
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      263     56.15	6.00	 0.5
+# channel counts
+B1	  18307
+B2	  19612
+
+###########
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      243     50.10	2.00	 1.0
+# channel counts
+A1	  493
+A2	  646
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      243     52.10	4.00	 1.0
+# channel counts
+A1	  1208
+A2	  1331
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      243     54.10	6.00	 1.0
+# channel counts
+A1	  1892
+A2	  2070
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      243     51.10	2.00	 1.0
+# channel counts
+B1	  1757
+B2	  1932
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      243     53.10	4.00	 1.0
+# channel counts
+B1	  3629
+B2	  3690
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+HAMA1	4      243     57.80	6.00	 1.0
+# channel counts
+B1	  5849
+B2	  6044
+
+###########
+
