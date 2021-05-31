@@ -1,0 +1,294 @@
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      293     34.20	2.00	 0.1
+# channel counts
+A1	  13941
+A2	  15439
+A3	  18790
+A4	  19409
+C1	  16008
+C2	  16002
+C3	  17433
+C4	  14555
+E1	  15882
+E2	  16027
+E3	  13224
+E4	  19418
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      293     36.20	4.00	 0.1
+# channel counts
+A1	  24375
+A2	  26575
+A3	  29822
+A4	  31238
+C1	  27743
+C2	  28536
+C3	  31356
+C4	  25496
+E1	  27734
+E2	  27505
+E3	  22624	
+E4	  34208
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      293     38.20	6.00	 0.1
+# channel counts
+A1	  33001
+A2	  36105
+A3	  39578
+A4	  40939
+C1	  37959
+C2	  36641
+C3	  42464
+C4	  34047
+E1	  36579
+E2	  36940
+E3	  31413
+E4	  47452
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      293     34.95	3.00	 0.1
+# channel counts
+B1	  17104
+B2	  15585
+B3	  20808
+B4	  19037
+D1	  19746
+D2	  18381
+D3	  22145
+D4	  19469
+F1	  17697
+F2	  20538
+F3	  18449
+F4	  20186
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      293     37.95	6.00	 0.1
+# channel counts
+B1	  30199
+B2	  28260
+B3	  39161
+B4	  35132
+D1	  35724
+D2	  34020
+D3	  40250
+D4	  34926
+F1	  30967
+F2	  36287
+F3	  35599
+F4	  35683
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      293     40.95	9.00	 0.1
+# channel counts
+B1	  43783
+B2	  41362
+B3	  57883
+B4	  52469
+D1	  52318
+D2	  49919
+D3	  58434
+D4	  51872
+F1	  46754
+F2	  52959
+F3	  52925
+F4	  51907
+
+###########
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      263     33.25	2.00	 0.2
+# channel counts
+A1	  1905
+A2	  2135
+A3	  2835
+A4	  2896
+C1	  2395
+C2	  2623
+C3	  2701
+C4	  2115
+E1	  2159
+E2	  2268
+E3	  1733
+E4	  3548
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      263     35.25	4.00	 0.2
+# channel counts
+A1	  4010
+A2	  4639
+A3	  5699
+A4	  5684
+C1	  4789
+C2	  5057
+C3	  5991
+C4	  4269
+E1	  4901
+E2	  4647
+E3	  3534
+E4	  8633
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      263     37.25	6.00	 0.2
+# channel counts
+A1	  6427
+A2	  7733
+A3	  9131
+A4	  8957
+C1	  7686
+C2	  7830
+C3	  9836
+C4	  7105
+E1	  7730
+E2	  7768
+E3	  5832
+E4	  16591
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      263     34.05	3.00	 0.2
+# channel counts
+B1	  2301
+B2	  1865
+B3	  3110
+B4	  2661
+D1	  2609
+D2	  2297
+D3	  3219
+D4	  2546
+F1	  2141
+F2	  2830
+F3	  2402
+F4	  2742
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      263     37.05	6.00	 0.2
+# channel counts
+B1	  4454
+B2	  3943
+B3	  7266
+B4	  5695
+D1	  5705
+D2	  5377
+D3	  7177
+D4	  5484
+F1	  4782
+F2	  5882
+F3	  5669
+F4	  5801
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      263     40.05	9.00	 0.2
+# channel counts
+B1	  7332
+B2	  6650
+B3	  12101
+B4	  9475
+D1	  9893
+D2	  8924
+D3	  11279
+D4	  10219
+F1	  8076
+F2	  9452
+F3	  10098
+F4	  9675
+
+###########
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      243     32.65	2.00	 0.5
+# channel counts
+A1	  764
+A2	  903
+A3	  1108
+A4	  1256
+C1	  920
+C2	  1082
+C3	  1229
+C4	  857
+E1	  839
+E2	  852
+E3	  627
+E4	  2002
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      243     34.65	4.00	 0.5
+# channel counts
+A1	  1656
+A2	  1999
+A3	  2422
+A4	  2440
+C1	  2052
+C2	  2439
+C3	  2799
+C4	  1772
+E1	  2057
+E2	  2148
+E3	  1496
+E4	  6646
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      243     36.65	6.00	 0.5
+# channel counts
+A1	  2912
+A2	  3464
+A3	  4364
+A4	  4239
+C1	  3548
+C2	  4186
+C3	  4913
+C4	  3124
+E1	  3438
+E2	  3689
+E3	  2629
+E4	  9012
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      243     33.50	3.00	 0.5
+# channel counts
+B1	  842
+B2	  732
+B3	  1362
+B4	  1081
+D1	  1120
+D2	  958
+D3	  1430
+D4	  1056
+F1	  879
+F2	  1208
+F3	  1117
+F4	  1097
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      243     36.50	6.00	 0.5
+# channel counts
+B1	  1916
+B2	  1602
+B3	  3319
+B4	  2729
+D1	  2591
+D2	  2166
+D3	  3268
+D4	  2500
+F1	  1984
+F2	  2559
+F3	  2577
+F4	  2517
+
+# board	serial temp(K) vbias(V) vover(V) time(s)
+FBK	4      243     39.50	9.00	 0.5
+# channel counts
+B1	  3430
+B2	  3070
+B3	  5707
+B4	  4516
+D1	  4436
+D2	  3913
+D3	  5523
+D4	  4664
+F1	  3536
+F2	  4267
+F3	  4732
+F4	  4399
+
+###########
+
