@@ -67,7 +67,7 @@ Vscan = np.arange(Vmin, Vmax, Vstep)
 Vsmart = [Vbd, Vbd + 5.]
 
 ### configure source, measure and trigger model
-ky.source_measure_config(Vscan = Vscan, Ilim = 25.e-6, reverse = True, Vsmart = Vsmart, Naver = Naver)
+ky.source_measure_config(Vscan = Vscan, Ilim = 250.e-6, reverse = True, Vsmart = Vsmart, Naver = Naver)
 ky.trigger_config(Twait = 30., Tstep = 0.5, Tmeas = 0., Nmeas = 25)
 
 ### start trigger model and wait
